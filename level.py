@@ -1,15 +1,36 @@
+import sqlite3
 import time
 
 class Levels:
+    def __init__(self):
+        self.conn = sqlite3.connect('game_data.db')
+        self.create_table()
+
+    def create_table(self):
+        cursor = self.conn.cursor()
+        cursor.execute('''CREATE TABLE IF NOT EXISTS game_progress (
+                            id INTEGER PRIMARY KEY,
+                            environment TEXT,
+                            challenge TEXT,
+                            choice TEXT,
+                            outcome TEXT
+                          )''')
+        self.conn.commit()
+
+    def record_progress(self, environment, challenge, choice, outcome):
+        cursor = self.conn.cursor()
+        cursor.execute('''INSERT INTO game_progress (environment, challenge, choice, outcome) 
+                          VALUES (?, ?, ?, ?)''', (environment, challenge, choice, outcome))
+        self.conn.commit()
+
     def validate_choice(self, choice, valid_choices):
-        """
-        Validate user input choice against a list of valid choices.
-        """
         if choice not in valid_choices:
             print("Invalid choice. Please select a valid option.")
             return False
         return True
+
     def game_forest(self):
+        self.record_progress('Forest', 'Start', '', 'Player enters the forest')
         print("Welcome to the Forest! The trees tower above you as you begin your journey...")
         time.sleep(2)
         print("As you navigate the dense undergrowth, you encounter a series of challenges.")
