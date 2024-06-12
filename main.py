@@ -1,9 +1,50 @@
-from game import AdventureQuest
+import time
+from level import Levels
 
-def main():
-    player_name = input("Welcome to AdventureQuest! Please enter your name: ")
-    game = AdventureQuest(player_name)
-    game.start_game()
+class AdventureQuest:
+    def __init__(self, player_name):
+        """
+        Initializes the AdventureQuest game with the player's name and creates an instance of Levels.
+        """
+        self.player_name = player_name
+        self.levels = Levels()
+
+    def start_game(self):
+        """
+        Starts the AdventureQuest game by welcoming the player and presenting level options.
+        """
+        print(f"Welcome, {self.player_name}, to Adventure Quest!")
+        time.sleep(2)
+        print("Your journey begins now...\n")
+        time.sleep(2)
+
+        while True:
+            print("Choose your level:")
+            print("1. Forest")
+            print("2. Mountains")
+            print("3. Desert")
+            print("4. Jungle")
+            print("5. Sky")
+            print("6. Exit game")
+            choice = input("Enter the number of your choice: ")
+
+            if choice == "1":
+                self.levels.game_forest()
+            elif choice == "2":
+                self.levels.game_mountains()
+            elif choice == "3":
+                self.levels.game_desert()
+            elif choice == "4":
+                self.levels.game_jungle()
+            elif choice == "5":
+                self.levels.game_sky()
+            elif choice == "6":
+                print("Thank you for playing Adventure Quest! Goodbye!")
+                break
+            else:
+                print("Invalid choice. Please select a valid level.\n")
 
 if __name__ == "__main__":
-    main()
+    player_name = input("Enter your name: ")
+    game = AdventureQuest(player_name)
+    game.start_game()
