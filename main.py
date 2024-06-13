@@ -49,6 +49,7 @@ class AdventureQuest:
         """
         Presents level options to the player and starts the selected level.
         """
+        
         while True:
             print("\nChoose your level:")
             print("1. Forest")
