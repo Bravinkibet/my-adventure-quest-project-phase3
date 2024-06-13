@@ -36,10 +36,14 @@ class Levels:
         self.conn.commit()
 
     def validate_choice(self, choice, valid_choices):
-        if choice not in valid_choices:
+        return choice in valid_choices
+
+    def prompt_choice(self, message, valid_choices):
+        choice = input(message)
+        while not self.validate_choice(choice, valid_choices):
             print("Invalid choice. Please select a valid option.")
-            return False
-        return True
+            choice = input(message)
+        return choice
 
     def game_forest(self, player_id):
         self.record_progress(player_id, 'Forest', 'Start', '', 'Player enters the forest')
@@ -53,20 +57,10 @@ class Levels:
         time.sleep(2)
         print("You come across a fork in the path. One direction looks well-traveled, while the other is overgrown and mysterious.")
         time.sleep(2)
-        choice = input("Do you want to take the well-traveled path (1) or the mysterious path (2)? ")
+        choice = self.prompt_choice("Do you want to take the well-traveled path (1) or the mysterious path (2)? ", ['1', '2'])
+        outcome = "You take the well-traveled path and make steady progress through the forest." if choice == "1" else "You choose the mysterious path and encounter hidden dangers, but also hidden treasures."
+        print(outcome)
         time.sleep(2)
-        if choice == "1":
-            outcome = "You take the well-traveled path and make steady progress through the forest."
-            print(outcome)
-            time.sleep(2)
-        elif choice == "2":
-            outcome = "You choose the mysterious path and encounter hidden dangers, but also hidden treasures."
-            print(outcome)
-            time.sleep(2)
-        else:
-            outcome = "You hesitate too long and lose your way, forcing you to find a new path."
-            print(outcome)
-            time.sleep(2)
         self.record_progress(player_id, 'Forest', 'Finding a path', choice, outcome)
 
         # Challenge 2: Wild animals
@@ -74,20 +68,10 @@ class Levels:
         time.sleep(2)
         print("You hear rustling in the bushes. Suddenly, a wild animal appears!")
         time.sleep(2)
-        choice = input("Do you want to try to scare the animal away (1) or slowly back away and find another route (2)? ")
+        choice = self.prompt_choice("Do you want to try to scare the animal away (1) or slowly back away and find another route (2)? ", ['1', '2'])
+        outcome = "You bravely face the animal and manage to scare it away, clearing your path forward." if choice == "1" else "You carefully back away and find another route, avoiding the animal."
+        print(outcome)
         time.sleep(2)
-        if choice == "1":
-            outcome = "You bravely face the animal and manage to scare it away, clearing your path forward."
-            print(outcome)
-            time.sleep(2)
-        elif choice == "2":
-            outcome = "You carefully back away and find another route, avoiding the animal."
-            print(outcome)
-            time.sleep(2)
-        else:
-            outcome = "Your hesitation puts you in danger, but you manage to escape unharmed."
-            print(outcome)
-            time.sleep(2)
         self.record_progress(player_id, 'Forest', 'Wild animals', choice, outcome)
 
         # Challenge 3: Crossing a river
@@ -95,20 +79,10 @@ class Levels:
         time.sleep(2)
         print("You come across a fast-flowing river. There's a rickety bridge and a narrow, slippery log.")
         time.sleep(2)
-        choice = input("Do you want to cross using the bridge (1) or the log (2)? ")
+        choice = self.prompt_choice("Do you want to cross using the bridge (1) or the log (2)? ", ['1', '2'])
+        outcome = "You carefully cross the bridge, despite its creaking protests." if choice == "1" else "You balance your way across the log, narrowly avoiding a fall into the river."
+        print(outcome)
         time.sleep(2)
-        if choice == "1":
-            outcome = "You carefully cross the bridge, despite its creaking protests."
-            print(outcome)
-            time.sleep(2)
-        elif choice == "2":
-            outcome = "You balance your way across the log, narrowly avoiding a fall into the river."
-            print(outcome)
-            time.sleep(2)
-        else:
-            outcome = "You hesitate too long and have to find a new way across, costing you precious time."
-            print(outcome)
-            time.sleep(2)
         self.record_progress(player_id, 'Forest', 'Crossing a river', choice, outcome)
 
         # Final Challenge: Forest clearing
@@ -118,20 +92,10 @@ class Levels:
         time.sleep(2)
         print("The tree seems to beckon you, but you sense potential danger.")
         time.sleep(2)
-        choice = input("Do you want to approach the tree (1) or avoid it and continue your journey (2)? ")
+        choice = self.prompt_choice("Do you want to approach the tree (1) or avoid it and continue your journey (2)? ", ['1', '2'])
+        outcome = "You approach the tree and discover it's a source of magical energy, granting you a boon for your journey." if choice == "1" else "You wisely avoid the tree, continuing your journey with caution."
+        print(outcome)
         time.sleep(2)
-        if choice == "1":
-            outcome = "You approach the tree and discover it's a source of magical energy, granting you a boon for your journey."
-            print(outcome)
-            time.sleep(2)
-        elif choice == "2":
-            outcome = "You wisely avoid the tree, continuing your journey with caution."
-            print(outcome)
-            time.sleep(2)
-        else:
-            outcome = "You hesitate too long, and the opportunity passes as the tree's glow fades."
-            print(outcome)
-            time.sleep(2)
         self.record_progress(player_id, 'Forest', 'Forest clearing', choice, outcome)
 
         print("Congratulations! You have conquered the Forest and braved its many challenges!")
@@ -354,4 +318,3 @@ class Levels:
 
         print("Congratulations! You have navigated the Sky and its aerial challenges!")
         print("Your adventure continues...\n")
-
