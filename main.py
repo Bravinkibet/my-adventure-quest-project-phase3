@@ -8,6 +8,7 @@ class AdventureQuest:
         """
         self.player_name = player_name
         self.levels = Levels()
+        self.player_id = self.levels.add_player(player_name)
 
     def start_game(self):
         """
@@ -29,15 +30,15 @@ class AdventureQuest:
             choice = input("Enter the number of your choice: ")
 
             if choice == "1":
-                self.levels.game_forest()
+                self.levels.game_forest(self.player_id)
             elif choice == "2":
-                self.levels.game_mountains()
+                self.levels.game_mountains(self.player_id)
             elif choice == "3":
-                self.levels.game_desert()
+                self.levels.game_desert(self.player_id)
             elif choice == "4":
-                self.levels.game_jungle()
+                self.levels.game_jungle(self.player_id)
             elif choice == "5":
-                self.levels.game_sky()
+                self.levels.game_sky(self.player_id)
             elif choice == "6":
                 print("Thank you for playing Adventure Quest! Goodbye!")
                 break
