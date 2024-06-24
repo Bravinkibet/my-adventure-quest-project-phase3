@@ -48,6 +48,6 @@ This project is licensed under the MIT License.
 
 If you have any questions or feedback about the Adventure CLI Application, you can contact:
 Phone: 0741937056
-Email: bravink599@gmail.com
+Email: bravink599@gmail.com .
 
 Feel free to change this README to include more specific details about your project, such as installation instructions, usage guidelines, project structure, and acknowledgments.
